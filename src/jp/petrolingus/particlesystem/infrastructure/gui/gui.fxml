@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root type="BorderPane"
+         xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         stylesheets="@style.css"
+         prefWidth="640"
+         prefHeight="480">
+    <center>
+        <BorderPane styleClass="content" fx:id="contentContainer"/>
+    </center>
+    <right>
+        <VBox styleClass="sidebar">
+            <VBox VBox.vgrow="ALWAYS" fx:id="chartContainer" styleClass="chart-container"/>
+            <VBox styleClass="controls-container">
+                <GridPane styleClass="settings">
+                    <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Particles count"/>
+                    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Radius"/>
+                    <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Start Velocity"/>
+                    <TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="particlesCount"/>
+                    <TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="radius"/>
+                    <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="startVelocity"/>
+                </GridPane>
+                <HBox styleClass="buttons">
+                    <Button text="Start" onAction="#onStart"/>
+                    <Button text="Stop" onAction="#onStop"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </right>
+</fx:root>

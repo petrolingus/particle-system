@@ -1,0 +1,21 @@
+.content {
+    -fx-background-color: gray;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
+.sidebar {
+    -fx-alignment: center;
+    -fx-spacing: 16px;
+    -fx-padding: 8px;
+}
+
+.settings {
+    -fx-vgap: 4px;
+    -fx-hgap: 8px;
+}
+
+.buttons {
+    -fx-alignment: center;
+    -fx-spacing: 8px;
+}
