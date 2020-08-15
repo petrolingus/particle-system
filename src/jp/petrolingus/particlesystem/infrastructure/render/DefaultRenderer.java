@@ -29,17 +29,16 @@ public class DefaultRenderer implements Renderer {
 
     @Override
     public void render() {
-        g.setGlobalAlpha(1.0);
-        g.setGlobalBlendMode(BlendMode.SRC_OVER);
+//        g.setGlobalAlpha(1.0);
+//        g.setGlobalBlendMode(BlendMode.SRC_OVER);
         g.setFill(Color.BLACK);
         g.clearRect(0, 0, width, height);
 
         for (Particle p : particles) {
-            g.setGlobalAlpha(1.0);
-            g.setGlobalBlendMode(BlendMode.ADD);
+//            g.setGlobalAlpha(1.0);
+//            g.setGlobalBlendMode(BlendMode.ADD);
             g.setFill(Color.BLACK);
             g.fillOval(p.x - p.r, p.y - p.r, p.r, p.r);
-            p.update(0.1);
         }
 
     }

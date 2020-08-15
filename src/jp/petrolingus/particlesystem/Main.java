@@ -27,10 +27,10 @@ public class Main extends Application {
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
 
-    private static final int N = 1000;
-    private static final int RADIUS = 2;
+    private static final int N = 100;
+    private static final int RADIUS = 4;
     private static final int SHIFT = RADIUS * 2;
-    private static final int START_VELOCITY = 10;
+    private static final int START_VELOCITY = 100000;
 
     private static final double DT = 0.00001;
 
