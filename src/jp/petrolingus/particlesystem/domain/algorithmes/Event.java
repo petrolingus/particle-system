@@ -7,6 +7,10 @@ public class Event implements Comparable<Event> {
     public int id2;
     public double time;
 
+    public Event() {
+        this(0, 0, 0, 0);
+    }
+
     public Event(int id, int id1, int id2, double time) {
         this.id = id;
         this.id1 = id1;

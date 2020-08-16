@@ -5,6 +5,12 @@ import jp.petrolingus.particlesystem.domain.Particle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.lang.Double.MAX_VALUE;
+import static java.util.stream.Collectors.toList;
 
 public class DefaultAlgorithm implements Algorithm {
 
@@ -22,7 +28,8 @@ public class DefaultAlgorithm implements Algorithm {
     //====================================
     // Состояние симуляции
     private double tm = 0;
-    private Event event = null;
+    private Event event = new Event(-1, 0, 0, MAX_VALUE);
+    private final List<Event> events;
     //====================================
 
 
@@ -38,27 +45,32 @@ public class DefaultAlgorithm implements Algorithm {
         this.n = particles.size();
         this.radius = radius;
         this.particles = particles;
+        this.events = Stream.generate(Event::new).limit(2 * n).collect(toList());
     }
 
     // TODO: Two similar methods need to group
-    private List<Event> getHorizontalWallEvents() {
-        List<Event> events = new ArrayList<>();
+    private void getHorizontalWallEvents(List<Event> events) {
         for (int i = 0; i < n; i++) {
             Particle p = particles.get(i);
-            double time = (p.vx < 0) ? (radius - p.x) / p.vx : (width - radius - p.x) / p.vx;
-            events.add(new Event(0, i, i, time));
+            Event event = events.get(i);
+
+            event.id = 0;
+            event.id1 = i;
+            event.id2 = i;
+            event.time = (p.vx < 0) ? (radius - p.x) / p.vx : (width - radius - p.x) / p.vx;
         }
-        return events;
     }
 
-    private List<Event> getVerticalWallEvents() {
-        List<Event> events = new ArrayList<>();
+    private void getVerticalWallEvents(List<Event> events) {
         for (int i = 0; i < n; i++) {
             Particle p = particles.get(i);
-            double time = (p.vy < 0) ? (radius - p.y) / p.vy : (height - radius - p.y) / p.vy;
-            events.add(new Event(1, i, i, time));
+            Event event = events.get(n + i);
+
+            event.id = 1;
+            event.id1 = i;
+            event.id2 = i;
+            event.time = (p.vy < 0) ? (radius - p.y) / p.vy : (height - radius - p.y) / p.vy;
         }
-        return events;
     }
 
     @Override
@@ -67,18 +79,16 @@ public class DefaultAlgorithm implements Algorithm {
         if (tm <= 0) {
 
             // Event handler
-            if (event != null && event.id == 0) {
+            if (event.id == 0) {
                 particles.get(event.id1).vx *= -1;
-            } else if (event != null && event.id == 1) {
+            } else if (event.id == 1) {
                 particles.get(event.id1).vy *= -1;
             }
 
             // Search for the nearest event
-            List<Event> events = new ArrayList<>();
-            events.addAll(getHorizontalWallEvents());
-            events.addAll(getVerticalWallEvents());
-            Collections.sort(events);
-            event = events.get(0);
+            getHorizontalWallEvents(events);
+            getVerticalWallEvents(events);
+            event = Collections.min(events);
             tm = event.time;
         }
 

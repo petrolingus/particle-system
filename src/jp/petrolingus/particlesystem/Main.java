@@ -26,13 +26,13 @@ public class Main extends Application {
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
 
-    private static final int N = 10000;
-    private static final int RADIUS = 4;
+    private static final int N = 10_000;
+    private static final int RADIUS = 1;
     private static final int SHIFT = RADIUS * 2;
     private static final int START_VELOCITY = 100000;
 
     private static final double DT = 0.00001;
-    private static final int ATTEMPTS = 1000;
+    private static final int ATTEMPTS = 100;
 
     private List<Particle> particles;
     private Generator generator;
@@ -56,6 +56,7 @@ public class Main extends Application {
 
     @Override
     public void init() throws IOException {
+        System.out.println("Initialize Main");
         particles = new ArrayList<>();
 
         generator = new RandomGenerator(WIDTH, HEIGHT, SHIFT);
@@ -75,6 +76,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        System.out.println("Start Main");
+
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

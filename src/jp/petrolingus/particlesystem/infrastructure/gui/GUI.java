@@ -32,6 +32,8 @@ public class GUI extends BorderPane {
     private VBox chartContainer;
 
     public GUI(Node content) throws IOException {
+        System.out.println("Create GUI");
+
         URL location = this.getClass().getResource("gui.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(location);

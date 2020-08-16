@@ -34,6 +34,7 @@
                                 onAction="#onStop"
                                 maxWidth="Infinity"/>
 
+                        <ColorPicker GridPane.rowIndex="4" GridPane.columnIndex="0"/>
                     </GridPane>
                     <HBox styleClass="buttons">
                     </HBox>
