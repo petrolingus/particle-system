@@ -6,11 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import jp.petrolingus.particlesystem.domain.Particle;
 import jp.petrolingus.particlesystem.domain.algorithmes.Algorithm;
 import jp.petrolingus.particlesystem.domain.algorithmes.DefaultAlgorithm;
-import jp.petrolingus.particlesystem.domain.Particle;
 import jp.petrolingus.particlesystem.infrastructure.generators.Generator;
 import jp.petrolingus.particlesystem.infrastructure.generators.RandomGenerator;
 import jp.petrolingus.particlesystem.infrastructure.gui.GUI;
@@ -27,12 +26,13 @@ public class Main extends Application {
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
 
-    private static final int N = 100;
+    private static final int N = 10000;
     private static final int RADIUS = 4;
     private static final int SHIFT = RADIUS * 2;
     private static final int START_VELOCITY = 100000;
 
     private static final double DT = 0.00001;
+    private static final int ATTEMPTS = 1000;
 
     private List<Particle> particles;
     private Generator generator;
@@ -59,9 +59,9 @@ public class Main extends Application {
         particles = new ArrayList<>();
 
         generator = new RandomGenerator(WIDTH, HEIGHT, SHIFT);
-        particles.addAll(generator.generate(N, RADIUS, START_VELOCITY));
+        particles.addAll(generator.generate(N, RADIUS, START_VELOCITY, ATTEMPTS));
 
-        algorithm = new DefaultAlgorithm(DT, N, RADIUS, particles);
+        algorithm = new DefaultAlgorithm(WIDTH, HEIGHT, DT, RADIUS, particles);
 
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         GraphicsContext g = canvas.getGraphicsContext2D();

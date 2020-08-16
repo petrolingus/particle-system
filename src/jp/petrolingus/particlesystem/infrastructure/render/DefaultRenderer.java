@@ -18,7 +18,7 @@ public class DefaultRenderer implements Renderer {
     public DefaultRenderer(int width, int height, GraphicsContext g, List<Particle> particles) {
         System.out.printf(
                 "Create DefaultRenderer: width=%d, height=%d, graphics=%s, particles=%s%n",
-                width, height, g, particles
+                width, height, g, particles.size()
         );
 
         this.width = width;

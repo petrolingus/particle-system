@@ -19,12 +19,16 @@ public class RandomGenerator implements Generator {
     }
 
     @Override
-    public List<Particle> generate(int n, double radius, double startVelocity) {
+    public List<Particle> generate(int n, double radius, double startVelocity, int attempts) {
+        System.out.printf(
+                "Generate random particles: n=%d, radius=%f, startVelocity=%f%n",
+                n, radius, startVelocity
+        );
 
         List<Particle> particles = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < 1000; j++) {
+            for (int j = 0; j < attempts; j++) {
                 double x = shift + Math.random() * (width - shift - shift);
                 double y = shift + Math.random() * (height - shift - shift);
                 boolean flag = false;
