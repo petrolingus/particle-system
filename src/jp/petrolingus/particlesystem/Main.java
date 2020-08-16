@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+// TODO: 17.08.2020 Limit number of events by limit area there particles collision
 public class Main extends Application {
 
     private static final int WIDTH = 640;
