@@ -15,6 +15,8 @@ import jp.petrolingus.particlesystem.infrastructure.generators.RandomGenerator;
 import jp.petrolingus.particlesystem.infrastructure.gui.GUI;
 import jp.petrolingus.particlesystem.infrastructure.render.DefaultRenderer;
 import jp.petrolingus.particlesystem.infrastructure.render.Renderer;
+import jp.petrolingus.particlesystem.util.logging.Logger;
+import jp.petrolingus.particlesystem.util.logging.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 // TODO: 17.08.2020 Limit number of events by limit area there particles collision
 public class Main extends Application {
 
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
 
@@ -57,7 +61,7 @@ public class Main extends Application {
 
     @Override
     public void init() throws IOException {
-        System.out.println("Initialize Main");
+        log.info("Initialize Main");
         particles = new ArrayList<>();
 
         generator = new RandomGenerator(WIDTH, HEIGHT, SHIFT);
@@ -77,7 +81,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println("Start Main");
+        log.info("Start Main");
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
@@ -94,6 +98,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        log.info("Hello ParticleSystem!");
         launch(args);
     }
 }

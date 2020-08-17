@@ -3,12 +3,17 @@ package jp.petrolingus.particlesystem.infrastructure.render;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.paint.Color;
+import jp.petrolingus.particlesystem.Main;
 import jp.petrolingus.particlesystem.domain.Particle;
+import jp.petrolingus.particlesystem.util.logging.Logger;
+import jp.petrolingus.particlesystem.util.logging.LoggerFactory;
 
 import java.util.List;
 
 public class DefaultRenderer implements Renderer {
-
+    
+    private static final Logger log = LoggerFactory.getLogger(DefaultRenderer.class);
+    
     private final int width;
     private final int height;
     private final GraphicsContext g;
@@ -16,10 +21,10 @@ public class DefaultRenderer implements Renderer {
     private final List<Particle> particles;
 
     public DefaultRenderer(int width, int height, GraphicsContext g, List<Particle> particles) {
-        System.out.printf(
-                "Create DefaultRenderer: width=%d, height=%d, graphics=%s, particles=%s%n",
+        log.debug(String.format(
+                "Create DefaultRenderer: width=%d, height=%d, graphics=%s, particles=%s",
                 width, height, g, particles.size()
-        );
+        ));
 
         this.width = width;
         this.height = height;

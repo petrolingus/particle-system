@@ -10,11 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import jp.petrolingus.particlesystem.Main;
+import jp.petrolingus.particlesystem.util.logging.Logger;
+import jp.petrolingus.particlesystem.util.logging.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class GUI extends BorderPane {
+    
+    private static final Logger log = LoggerFactory.getLogger(GUI.class);
 
     @FXML
     private BorderPane contentContainer;
@@ -32,7 +37,7 @@ public class GUI extends BorderPane {
     private VBox chartContainer;
 
     public GUI(Node content) throws IOException {
-        System.out.println("Create GUI");
+        log.debug("Create GUI");
 
         URL location = this.getClass().getResource("gui.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -52,11 +57,11 @@ public class GUI extends BorderPane {
 
     @FXML
     private void onStart() {
-        System.out.println("onStart");
+        log.info("onStart");
     }
 
     @FXML
     private void onStop() {
-        System.out.println("onStop");
+        log.info("onStop");
     }
 }
