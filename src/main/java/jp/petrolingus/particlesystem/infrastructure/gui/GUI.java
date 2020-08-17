@@ -2,7 +2,6 @@ package jp.petrolingus.particlesystem.infrastructure.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.BarChart;
@@ -59,7 +58,7 @@ public class GUI extends BorderPane {
 	private final ParticleSimulationSettings simulationSettings = new ParticleSimulationSettings();
 	
 	
-	public GUI(Node content) {
+	public GUI() {
 		log.debug("Create GUI");
 		
 		UiComponentLoader.load(this, "gui.fxml");
