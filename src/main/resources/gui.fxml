@@ -6,8 +6,8 @@
          xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          stylesheets="@style.css"
-         prefWidth="640"
-         prefHeight="480">
+         prefWidth="1240"
+         prefHeight="720">
     <center>
         <SplitPane >
             <BorderPane fx:id="simulationContainer"/>
