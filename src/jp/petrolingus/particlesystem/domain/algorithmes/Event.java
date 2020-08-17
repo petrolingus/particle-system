@@ -8,7 +8,7 @@ public class Event implements Comparable<Event> {
     public double time;
 
     public Event() {
-        this(0, 0, 0, 0);
+        this(-1, 0, 0, Double.MAX_VALUE);
     }
 
     public Event(int id, int id1, int id2, double time) {
