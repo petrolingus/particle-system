@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+group = 'jp.petrolingus'
+version = '0.3-SNAPSHOT'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+
+}
+
+application {
+    mainClassName = 'jp.petrolingus.particlesystem.Main'
+}
+
+javafx {
+    version = '14'
+    modules = ['javafx.controls', 'javafx.fxml']
+}

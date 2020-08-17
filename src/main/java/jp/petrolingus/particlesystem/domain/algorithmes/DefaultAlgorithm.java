@@ -16,7 +16,7 @@ public class DefaultAlgorithm implements Algorithm {
 	private static final Logger log = LoggerFactory.getLogger(DefaultAlgorithm.class);
 	
 	//====================================
-	// Параметры симуляции
+	// Simulation parameters
 	private final int width;
 	private final int height;
 	private final double dt;
@@ -27,7 +27,7 @@ public class DefaultAlgorithm implements Algorithm {
 	
 	
 	//====================================
-	// Состояние симуляции
+	// Simulation state
 	private double tm = 0;
 	private Event event = new Event(-1, 0, 0, MAX_VALUE);
 	private final List<Event> events;

@@ -9,7 +9,7 @@ public class UiComponentLoader {
 	
 	public static void load(Object component, String path) {
 		ClassLoader classLoader = UiComponentLoader.class.getClassLoader();
-		URL location = classLoader.getResource("assets/" + path);
+		URL location = classLoader.getResource(path);
 		FXMLLoader loader = new FXMLLoader();
 		loader.setClassLoader(classLoader);
 		loader.setLocation(location);

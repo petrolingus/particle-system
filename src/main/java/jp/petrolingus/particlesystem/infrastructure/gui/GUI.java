@@ -71,7 +71,6 @@ public class GUI extends BorderPane {
 		VBox.setVgrow(chart, Priority.ALWAYS);
 		
 		chartContainer.setCenter(chart);
-//		this.simulationContainer.setCenter(content);
 		settingsContainer.setCenter(simulationSettings);
 		
 		start.setDisable(false);
@@ -121,7 +120,7 @@ public class GUI extends BorderPane {
 		simulationSettings.setDisable(true);
 		start.setDisable(true);
 		stop.setDisable(false);
-		resume.setDisable(false);
+		resume.setDisable(true);
 		clear.setDisable(true);
 		simulation.get().ifPresent(Simulation::start);
 	}
