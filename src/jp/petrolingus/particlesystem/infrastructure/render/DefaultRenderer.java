@@ -42,5 +42,10 @@ public class DefaultRenderer implements Renderer {
         }
 
     }
-
+    
+    @Override
+    public void clear() {
+        g.clearRect(0, 0, width, height);
+    }
+    
 }
