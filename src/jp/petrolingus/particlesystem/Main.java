@@ -32,7 +32,7 @@ public class Main extends Application {
     private static final int HEIGHT = 480;
 
     private static final int N = 10_000;
-    private static final int RADIUS = 1;
+    private static final int RADIUS = 10;
     private static final int SHIFT = RADIUS * 2;
     private static final int START_VELOCITY = 100000;
 

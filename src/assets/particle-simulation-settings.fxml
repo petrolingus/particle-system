@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root type="BorderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <center>
+        <HBox alignment="CENTER">
+            <VBox styleClass="field-rows">
+                <HBox styleClass="field-row">
+                    <HBox styleClass="field">
+                        <Label text="Width:"/>
+                        <TextField fx:id="width" prefColumnCount="4"/>
+                    </HBox>
+                    <HBox styleClass="field">
+                        <Label text="Height:"/>
+                        <TextField fx:id="height" prefColumnCount="4"/>
+                    </HBox>
+                </HBox>
+                <HBox styleClass="field-row">
+                    <Label text="Particle: "/>
+                    <HBox styleClass="field">
+                        <Label text="N:"/>
+                        <TextField fx:id="n" prefColumnCount="4"/>
+                    </HBox>
+                    <HBox styleClass="field">
+                        <Label text="Radius:"/>
+                        <TextField fx:id="radius" prefColumnCount="3"/>
+                    </HBox>
+                </HBox>
+                <HBox styleClass="field-row">
+                    <HBox styleClass="field">
+                        <Label text="Generation attempts:"/>
+                        <TextField fx:id="attempts" prefColumnCount="3"/>
+                    </HBox>
+                </HBox>
+                <HBox styleClass="field-row">
+                    <HBox styleClass="field">
+                        <Label text="Start velocity:"/>
+                        <TextField fx:id="startVelocity" prefColumnCount="5"/>
+                    </HBox>
+                    <HBox styleClass="field">
+                        <Label text="dt:"/>
+                        <TextField fx:id="dt" prefColumnCount="5"/>
+                    </HBox>
+                </HBox>
+            </VBox>
+        </HBox>
+    </center>
+</fx:root>

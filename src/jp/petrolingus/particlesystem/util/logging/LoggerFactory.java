@@ -9,6 +9,6 @@ public class LoggerFactory {
 	}
 	
 	public static Logger getLogger(String name) {
-		return new SimpleConsoleLogger(DateTimeFormatter.ISO_LOCAL_TIME);
+		return new SimpleConsoleLogger(DateTimeFormatter.ofPattern("hh:mm:ss.SSS"));
 	}
 }

@@ -1,6 +1,5 @@
 package jp.petrolingus.particlesystem.util.logging;
 
-import java.time.Instant;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 

@@ -19,3 +19,18 @@
     -fx-alignment: center;
     -fx-spacing: 8px;
 }
+
+.field {
+    -fx-alignment: center;
+    -fx-spacing: 4;
+}
+
+.field-row {
+    -fx-alignment: center-left;
+    -fx-spacing: 8;
+}
+
+.field-rows {
+    -fx-alignment: center;
+    -fx-spacing: 8;
+}
