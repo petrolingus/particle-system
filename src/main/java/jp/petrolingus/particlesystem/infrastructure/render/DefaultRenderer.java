@@ -39,11 +39,14 @@ public class DefaultRenderer implements Renderer {
         g.setFill(Color.BLACK);
         g.clearRect(0, 0, width, height);
 
+        g.setLineWidth(1);
+        g.strokeRect(0, 0, width, height);
+
         for (Particle p : particles) {
 //            g.setGlobalAlpha(1.0);
 //            g.setGlobalBlendMode(BlendMode.ADD);
             g.setFill(Color.BLACK);
-            g.fillOval(p.x - p.r, p.y - p.r, p.r, p.r);
+            g.fillOval(p.x - p.r, p.y - p.r, 2 * p.r, 2 * p.r);
         }
 
     }
