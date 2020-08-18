@@ -55,6 +55,7 @@ public class DefaultAlgorithm implements Algorithm {
 			event.id1 = i;
 			event.id2 = i;
 			event.time = (p.vx < 0) ? (radius - p.x) / p.vx : (width - radius - p.x) / p.vx;
+			event.time = (p.vx == 0) ? MAX_VALUE : event.time;
 		}
 	}
 
@@ -66,6 +67,7 @@ public class DefaultAlgorithm implements Algorithm {
 			event.id1 = i;
 			event.id2 = i;
 			event.time = (p.vy < 0) ? (radius - p.y) / p.vy : (height - radius - p.y) / p.vy;
+			event.time = (p.vy == 0) ? MAX_VALUE : event.time;
 		}
 	}
 
@@ -76,6 +78,13 @@ public class DefaultAlgorithm implements Algorithm {
 
 			for (int j = i + 1; j < n; j++) {
 				Particle p2 = particles.get(j);
+
+				int id = i * n + j - (i + 1) * (i + 2) / 2;
+				Event event = events.get(2 * n + id);
+				event.id = 2;
+				event.id1 = i;
+				event.id2 = j;
+				event.time = MAX_VALUE;
 
 				double dx = p1.x - p2.x;
 				double dy = p1.y - p2.y;
@@ -90,11 +99,6 @@ public class DefaultAlgorithm implements Algorithm {
 				if (D > 0) {
 					double t = (-b - Math.sqrt(D)) / (2 * a);
 					if (t > 0) {
-						int id = i * n + j - (i + 1) * (i + 2) / 2;
-						Event event = events.get(2 * n + id);
-						event.id = 2;
-						event.id1 = i;
-						event.id2 = j;
 						event.time = t;
 					}
 				}
@@ -114,8 +118,8 @@ public class DefaultAlgorithm implements Algorithm {
 				particles.get(event.id1).vy *= -1;
 			} else if (event.id == 2) {
 
-				double cosa = (particles.get(event.id1).x - particles.get(event.id2).x) / (2 * radius);
-				double sina = (particles.get(event.id1).y - particles.get(event.id2).y) / (2 * radius);
+				double cosa = (particles.get(event.id1).x - particles.get(event.id2).x) / (2.0 * radius);
+				double sina = (particles.get(event.id1).y - particles.get(event.id2).y) / (2.0 * radius);
 
 				double vx0 = particles.get(event.id1).vx;
 				double vy0 = particles.get(event.id1).vy;
@@ -131,12 +135,17 @@ public class DefaultAlgorithm implements Algorithm {
 				particles.get(event.id1).vy = nvy0;
 				particles.get(event.id2).vx = nvx1;
 				particles.get(event.id2).vy = nvy1;
+
+				particles.get(event.id1).vx = nvx0;
+				particles.get(event.id1).vy = nvy0;
+				particles.get(event.id2).vx = nvx1;
+				particles.get(event.id2).vy = nvy1;
 			}
 
 			// Search for the nearest event
 			getHorizontalWallEvents(events);
 			getVerticalWallEvents(events);
-			//getCollisionEvents(events);
+			getCollisionEvents(events);
 			event = Collections.min(events);
 			tm = event.time;
 		}

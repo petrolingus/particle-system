@@ -43,10 +43,10 @@ public class ParticleSimulationSettings extends BorderPane {
 		
 		width.setText("640");
 		height.setText("480");
-		radius.setText("10");
+		radius.setText("4");
 		attempts.setText("100");
 		startVelocity.setText("100000");
-		n.setText("1000");
+		n.setText("64");
 		dt.setText("0.00001");
 		
 	}
