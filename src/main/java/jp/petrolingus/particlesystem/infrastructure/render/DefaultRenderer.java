@@ -2,7 +2,9 @@ package jp.petrolingus.particlesystem.infrastructure.render;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.MotionBlur;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import jp.petrolingus.particlesystem.Main;
 import jp.petrolingus.particlesystem.domain.Particle;
 import jp.petrolingus.particlesystem.util.logging.Logger;
@@ -45,7 +47,9 @@ public class DefaultRenderer implements Renderer {
         for (Particle p : particles) {
 //            g.setGlobalAlpha(1.0);
 //            g.setGlobalBlendMode(BlendMode.ADD);
-            g.setFill(Color.BLACK);
+            float r = ((float) Math.sqrt(p.vx * p.vx + p.vy * p.vy) / 400_000);
+            r = r > 1.0 ? 1 : r;
+            g.setFill(new Color(r, 0, 0, 1));
             g.fillOval(p.x - p.r, p.y - p.r, 2 * p.r, 2 * p.r);
         }
 
