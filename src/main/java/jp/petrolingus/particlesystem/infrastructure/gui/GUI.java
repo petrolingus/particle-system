@@ -7,6 +7,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
@@ -25,12 +28,17 @@ import jp.petrolingus.particlesystem.util.logging.LoggerFactory;
 import jp.petrolingus.particlesystem.util.uicomponent.UiComponentLoader;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static javafx.scene.chart.XYChart.*;
 
 public class GUI extends BorderPane {
 	
 	private static final Logger log = LoggerFactory.getLogger(GUI.class);
+
+	private List<Particle> particles;
 	
 	@FXML
 	private BorderPane simulationContainer;
@@ -56,17 +64,22 @@ public class GUI extends BorderPane {
 	
 	private final AtomicReference<Optional<Simulation>> simulation = new AtomicReference<>(Optional.empty());
 	private final ParticleSimulationSettings simulationSettings = new ParticleSimulationSettings();
-	
-	
+	private final BarChart<String, Number> chart;
+
+
 	public GUI() {
+
 		log.debug("Create GUI");
 		
 		UiComponentLoader.load(this, "gui.fxml");
 		
 		CategoryAxis xAxis = new CategoryAxis();
+		xAxis.setAnimated(false);
+
 		NumberAxis yAxis = new NumberAxis();
-		
-		BarChart<String, Number> chart = new BarChart<>(xAxis, yAxis);
+		yAxis.setAnimated(true);
+
+		chart = new BarChart<>(xAxis, yAxis);
 		VBox.setVgrow(chart, Priority.ALWAYS);
 		
 		chartContainer.setCenter(chart);
@@ -95,21 +108,29 @@ public class GUI extends BorderPane {
 		ParticleSimulationSettings s = this.simulationSettings;
 		
 		Generator generator = new RandomGenerator(s.width(), s.height(), s.shift());
-		List<Particle> particles = generator.generate(s.n(), s.radius(), s.startVelocity(), s.attempts());
+		particles = generator.generate(s.n(), s.radius(), s.startVelocity(), s.attempts());
 		Algorithm algorithm = new DefaultAlgorithm(s.width(), s.height(), s.dt(), s.radius(), particles);
-		
+
 		Platform.runLater(() -> {
-			
+			chart.getData().clear();
+			chart.setCategoryGap(0);
+//			chart.setBarGap(0);
+//			chart.setTitle("TITLE");
+//			chart.setMaxHeight(1000);
+			chart.setAnimated(false);
+
 			Canvas canvas = new Canvas(s.width(), s.height());
 			simulationContainer.setCenter(canvas);
+
+			Series<String, Number> series = new Series<>();
+			chart.getData().addAll(List.of(series));
 			
 			GraphicsContext g = canvas.getGraphicsContext2D();
-			Renderer renderer = new DefaultRenderer(s.width(), s.height(), g, particles);
+			Renderer renderer = new DefaultRenderer(s.width(), s.height(), g, particles, series);
 			
 			Simulation simulation = new DefaultSimulation(algorithm, renderer);
 			simulation.start();
 			this.simulation.set(Optional.of(simulation));
-			
 		});
 	}
 	
