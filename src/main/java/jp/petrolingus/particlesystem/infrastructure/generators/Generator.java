@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Generator {
 
-    List<Particle> generate(int n, double radius, double startVelocity, int attempts);
+    List<Particle> generate();
 
 }

@@ -7,8 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -28,11 +26,8 @@ import jp.petrolingus.particlesystem.util.logging.LoggerFactory;
 import jp.petrolingus.particlesystem.util.uicomponent.UiComponentLoader;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static javafx.scene.chart.XYChart.*;
 
 public class GUI extends BorderPane {
 	
@@ -107,8 +102,8 @@ public class GUI extends BorderPane {
 	private void start() {
 		ParticleSimulationSettings s = this.simulationSettings;
 		
-		Generator generator = new RandomGenerator(s.width(), s.height(), s.shift());
-		particles = generator.generate(s.n(), s.radius(), s.startVelocity(), s.attempts());
+		Generator generator = new RandomGenerator(s.width(), s.height(), s.shift(), s.n(), s.radius(), s.startVelocity(), s.attempts());
+		particles = generator.generate();
 		Algorithm algorithm = new DefaultAlgorithm(s.width(), s.height(), s.dt(), s.radius(), particles);
 
 		Platform.runLater(() -> {

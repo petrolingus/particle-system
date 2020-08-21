@@ -14,18 +14,27 @@ public class RandomGenerator implements Generator {
 	private final int width;
 	private final int height;
 	private final int shift;
-	
-	public RandomGenerator(int width, int height, int shift) {
+
+	private final int n;
+	private final int radius;
+	private final double startVelocity;
+	private final int attempts;
+
+	public RandomGenerator(int width, int height, int shift, int n, int radius, double startVelocity, int attempts) {
 		log.debug(String.format("Create RandomGenerator: width=%d, height=%d, shift=%d", width, height, shift));
+		this.n = n;
+		this.radius = radius;
+		this.startVelocity = startVelocity;
+		this.attempts = attempts;
 		this.width = width;
 		this.height = height;
 		this.shift = shift;
 	}
 	
 	@Override
-	public List<Particle> generate(int n, double radius, double startVelocity, int attempts) {
+	public List<Particle> generate() {
 		log.info(String.format(
-				"Generate random particles: n=%d, radius=%f, startVelocity=%f",
+				"Generate random particles: n=%d, radius=%d, startVelocity=%f",
 				n, radius, startVelocity
 		));
 		
