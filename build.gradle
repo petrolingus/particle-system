@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-
+    implementation 'de.gsi.chart:chartfx-chart:11.1.5'
 }
 
 run {
