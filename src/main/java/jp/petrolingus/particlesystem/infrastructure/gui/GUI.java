@@ -17,6 +17,7 @@ import jp.petrolingus.particlesystem.domain.algorithmes.Algorithm;
 import jp.petrolingus.particlesystem.domain.algorithmes.DefaultAlgorithm;
 import jp.petrolingus.particlesystem.infrastructure.generators.Generator;
 import jp.petrolingus.particlesystem.infrastructure.generators.RandomGenerator;
+import jp.petrolingus.particlesystem.infrastructure.generators.SimpleGenerator;
 import jp.petrolingus.particlesystem.infrastructure.render.DefaultRenderer;
 import jp.petrolingus.particlesystem.infrastructure.render.Renderer;
 import jp.petrolingus.particlesystem.infrastructure.simulation.DefaultSimulation;
@@ -102,7 +103,7 @@ public class GUI extends BorderPane {
 	private void start() {
 		ParticleSimulationSettings s = this.simulationSettings;
 		
-		Generator generator = new RandomGenerator(s.width(), s.height(), s.shift(), s.n(), s.radius(), s.startVelocity(), s.attempts());
+		Generator generator = new SimpleGenerator(s.width(), s.height(), s.radius(), s.startVelocity());
 		particles = generator.generate();
 		Algorithm algorithm = new DefaultAlgorithm(s.width(), s.height(), s.dt(), s.radius(), particles);
 
