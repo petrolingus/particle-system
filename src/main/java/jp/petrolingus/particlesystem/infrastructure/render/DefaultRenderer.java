@@ -22,9 +22,13 @@ public class DefaultRenderer implements Renderer {
     private final List<Particle> particles;
     private final XYChart.Series<String, Number> series;
 
+    private final double v0;
+    private final double velGap;
+
     private final int[] velocities = new int[40];
 
-    public DefaultRenderer(int width, int height, GraphicsContext g, List<Particle> particles, XYChart.Series<String, Number> series) {
+    public DefaultRenderer(int width, int height, GraphicsContext g, List<Particle> particles, XYChart.Series<String, Number> series, double v0) {
+
         log.debug(String.format(
                 "Create DefaultRenderer: width=%d, height=%d, graphics=%s, particles=%s",
                 width, height, g, particles.size()
@@ -35,14 +39,11 @@ public class DefaultRenderer implements Renderer {
         this.g = g;
         this.particles = particles;
         this.series = series;
+        this.v0 = v0;
+        this.velGap = v0 / 10.0;
     }
 
     private void generateGraphData() {
-
-        // TODO: 19.08.2020 Move this shit
-        double v0 = 100_000.0;
-        double velGap = v0 / 10.0;
-
         for (Particle p : particles) {
             double velocityMagnitude = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
             // TODO: 20.08.2020 Fix calculate id

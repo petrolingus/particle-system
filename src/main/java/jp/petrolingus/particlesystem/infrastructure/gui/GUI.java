@@ -103,7 +103,8 @@ public class GUI extends BorderPane {
 	private void start() {
 		ParticleSimulationSettings s = this.simulationSettings;
 		
-		Generator generator = new SimpleGenerator(s.width(), s.height(), s.radius(), s.startVelocity());
+//		Generator generator = new SimpleGenerator(s.width(), s.height(), s.radius(), s.startVelocity());
+		Generator generator = new RandomGenerator(s.width(), s.height(), s.shift(), s.n(), s.radius(), s.startVelocity(), s.attempts());
 		particles = generator.generate();
 		Algorithm algorithm = new DefaultAlgorithm(s.width(), s.height(), s.dt(), s.radius(), particles);
 
@@ -122,7 +123,7 @@ public class GUI extends BorderPane {
 			chart.getData().addAll(List.of(series));
 			
 			GraphicsContext g = canvas.getGraphicsContext2D();
-			Renderer renderer = new DefaultRenderer(s.width(), s.height(), g, particles, series);
+			Renderer renderer = new DefaultRenderer(s.width(), s.height(), g, particles, series, s.startVelocity());
 			
 			Simulation simulation = new DefaultSimulation(algorithm, renderer);
 			simulation.start();
