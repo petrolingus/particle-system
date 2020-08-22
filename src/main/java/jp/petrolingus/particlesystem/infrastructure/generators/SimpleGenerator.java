@@ -35,7 +35,7 @@ public class SimpleGenerator implements Generator {
         List<Particle> particles = new ArrayList<>();
 
         particles.add(new Particle(width / 2.0 - width * 0.2, height / 2.0, startVelocity, 0, radius));
-        particles.add(new Particle(width / 2.0 + width * 0.2, height / 2.0, -startVelocity, 0, radius));
+        particles.add(new Particle(width / 2.0 + width * 0.2, height / 2.0, 0, 0, radius));
 
         return particles;
     }

@@ -4,6 +4,10 @@ import jp.petrolingus.particlesystem.domain.Particle;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Stream;
 
 import static java.lang.Double.MAX_VALUE;
@@ -29,6 +33,7 @@ public class DefaultAlgorithm implements Algorithm {
 	private final List<Event> events;
 	//====================================
 
+	ExecutorService executorService;
 
 	public DefaultAlgorithm(int width, int height, double dt, double radius, List<Particle> particles) {
 		System.out.printf(
@@ -44,6 +49,7 @@ public class DefaultAlgorithm implements Algorithm {
 		this.particles = particles;
 		int eventCount = 2 * n + (n * (n - 1) / 2);
 		this.events = Stream.generate(Event::new).limit(eventCount).collect(toList());
+		executorService = Executors.newFixedThreadPool(3);
 	}
 
 	// TODO: Two similar methods need to group
@@ -143,9 +149,22 @@ public class DefaultAlgorithm implements Algorithm {
 			}
 
 			// Search for the nearest event
-			getHorizontalWallEvents(events);
-			getVerticalWallEvents(events);
-			getCollisionEvents(events);
+
+			var horizontalFuture = executorService.submit(() -> getHorizontalWallEvents(events));
+			var verticalFuture = executorService.submit(() -> getVerticalWallEvents(events));
+			var collisionFuture = executorService.submit(() -> getCollisionEvents(events));
+
+			try {
+				horizontalFuture.get();
+				verticalFuture.get();
+				collisionFuture.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+
+//			getHorizontalWallEvents(events);
+//			getVerticalWallEvents(events);
+//			getCollisionEvents(events);
 			event = Collections.min(events);
 			tm = event.time;
 		}
